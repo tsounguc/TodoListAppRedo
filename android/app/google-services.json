@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "716832877380",
+    "firebase_url": "https://flutter-todo-app-redo.firebaseio.com",
+    "project_id": "flutter-todo-app-redo",
+    "storage_bucket": "flutter-todo-app-redo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716832877380:android:f65b9ce11950b99ba9c511",
+        "android_client_info": {
+          "package_name": "com.example.todolistappredo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716832877380-l3g2lt1i9gck768tt25lds6lq86lc2nj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChY7xvWy-h0ZoRSZ-6pbxUsd3h6KAn2mc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716832877380-l3g2lt1i9gck768tt25lds6lq86lc2nj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

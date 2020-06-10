@@ -1,7 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todolistappredo/Login_And_Auth/auth.dart';
 
 class LoginPage extends StatefulWidget {
+  LoginPage(
+    this.auth,
+//    this.onSignedIn,
+//    this.onSignUpForm,
+  );
+
+  final BaseAuth auth;
+
+//  final VoidCallback onSignedIn;
+//  final VoidCallback onSignUpForm;
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -9,7 +20,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String _email, _password;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Form(
-                key: _formkey,
+                key: _formKey,
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -106,6 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
+                          color: Colors.white,
                           child: Text('LogIn'),
                           onPressed: logIn,
                         ),
@@ -140,10 +152,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> logIn() async {
-    final formState = _formkey.currentState;
+    final formState = _formKey.currentState;
     if (formState.validate()) {
       formState.save();
-      try {} catch (e) {
+      try {
+        await widget.auth.signInWithEmailAndPassword(_email, _password);
+//        widget.onSignedIn();
+      } catch (e) {
         _scaffoldKey.currentState.showSnackBar(SnackBar(
           content: Text('${e.message}'),
           duration: Duration(seconds: 5),

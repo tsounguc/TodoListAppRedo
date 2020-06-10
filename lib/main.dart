@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolistappredo/Login_And_Auth/auth.dart';
 import 'package:todolistappredo/Login_And_Auth/loginPage.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
 //        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginPage(),
+      home: LoginPage(new Auth(), ),
     );
   }
 }

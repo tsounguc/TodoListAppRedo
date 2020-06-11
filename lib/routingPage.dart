@@ -26,6 +26,7 @@ class _RoutingPageState extends State<RoutingPage> {
   AuthStatus _authStatus = AuthStatus.notSignedIn;
   FormType _formType = FormType.login;
   FirebaseUser currentUser;
+  String userEmail;
 
   @override
   void initState() {

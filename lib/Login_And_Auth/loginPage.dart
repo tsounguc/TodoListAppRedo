@@ -153,13 +153,16 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> logIn() async {
+    //TODO Validate fields
     final formState = _formKey.currentState;
     if (formState.validate()) {
+      //TODO Login to firebase
       formState.save();
       try {
         await widget.auth.signInWithEmailAndPassword(_email, _password);
         widget.onSignedIn();
       } catch (e) {
+        print(e.message);
         _scaffoldKey.currentState.showSnackBar(SnackBar(
           content: Text('${e.message}'),
           duration: Duration(seconds: 5),

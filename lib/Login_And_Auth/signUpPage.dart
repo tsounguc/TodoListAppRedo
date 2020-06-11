@@ -168,6 +168,7 @@ class _SignUpPageState extends State<SignUpPage> {
             .document('$userEmail')
             .collection('tasks')
             .add({});
+        navigateToLogInPage();
       } catch (e) {
         _scaffoldKey.currentState.showSnackBar(SnackBar(
           content: Text('${e.message}'),

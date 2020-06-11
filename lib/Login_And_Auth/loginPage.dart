@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
 
   final VoidCallback onSignedIn;
   final VoidCallback onSignUpForm;
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -157,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
       formState.save();
       try {
         await widget.auth.signInWithEmailAndPassword(_email, _password);
-//        widget.onSignedIn();
+        widget.onSignedIn();
       } catch (e) {
         _scaffoldKey.currentState.showSnackBar(SnackBar(
           content: Text('${e.message}'),
@@ -167,5 +168,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void navigateToSignUpPage() {}
+  void navigateToSignUpPage() {
+    widget.onSignUpForm();
+  }
 }

@@ -1,17 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:todolistappredo/Login_And_Auth/auth.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage(
     this.auth,
-//    this.onSignedOut,
-//    this.onLogInForm,
+    this.onSignedOut,
+    this.onLogInForm,
   );
 
   final BaseAuth auth;
 
-//  final VoidCallback onSignedOut;
-//  final VoidCallback onLogInForm;
+  final VoidCallback onSignedOut;
+  final VoidCallback onLogInForm;
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -150,8 +151,32 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-  void signUp()async{}
 
-  void navigateToLogInPage(){}
+  void signUp() async {
+    final formState = _formKey.currentState;
+    if (formState.validate()) {
+      formState.save();
+      try {
+        String userEmail = await widget.auth.createUserWithEmailAndPassword(_email, _password);
+        Firestore.instance
+            .collection('users')
+            .document('$userEmail')
+            .setData({});
+
+        Firestore.instance
+            .collection('users')
+            .document('$userEmail')
+            .collection('tasks')
+            .add({});
+      } catch (e) {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text('${e.message}'),
+        ));
+      }
+    }
+  }
+
+  void navigateToLogInPage() {
+    widget.onLogInForm();
+  }
 }
-

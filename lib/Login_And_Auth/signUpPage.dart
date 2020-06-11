@@ -1,26 +1,26 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todolistappredo/Login_And_Auth/auth.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage(
+class SignUpPage extends StatefulWidget {
+  SignUpPage(
     this.auth,
-    this.onSignedIn,
-    this.onSignUpForm,
+//    this.onSignedOut,
+//    this.onLogInForm,
   );
 
   final BaseAuth auth;
 
-  final VoidCallback onSignedIn;
-  final VoidCallback onSignUpForm;
+//  final VoidCallback onSignedOut;
+//  final VoidCallback onLogInForm;
+
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   String _email, _password;
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,8 @@ class _LoginPageState extends State<LoginPage> {
         gradient: LinearGradient(
           colors: [
             Colors.blue[900],
-//            Colors.blue,
             Colors.lightBlue,
-            Colors.lightBlueAccent
+            Colors.lightBlueAccent,
           ],
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
@@ -58,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                             left: 8.0, top: 150, right: 8.0, bottom: 150),
                         child: Center(
                           child: Text(
-                            'Login',
+                            'Sign Up',
                             style: TextStyle(color: Colors.white, fontSize: 50),
                           ),
                         ),
@@ -88,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 0.0, top: 0.0, right: 0.0, bottom: 15),
+                            left: 0.0, top: 0.0, right: 0.0, bottom: 15.0),
                         child: TextFormField(
                           autofocus: false,
                           validator: (input) {
@@ -115,29 +114,30 @@ class _LoginPageState extends State<LoginPage> {
                         height: 50,
                         child: RaisedButton(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                              borderRadius: new BorderRadius.circular(15)),
                           color: Colors.white,
-                          child: Text('LogIn'),
-                          onPressed: logIn,
+                          onPressed: signUp,
+                          child: Text("Create Account"),
                         ),
+                      ),
+                      Container(
+                        height: 10,
                       ),
                       SizedBox(
                         width: 200,
                         height: 50,
                         child: FlatButton(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                              borderRadius: new BorderRadius.circular(15)),
                           color: Colors.transparent,
+                          onPressed: navigateToLogInPage,
                           child: Text(
-                            'Create an account',
+                            'Have an account?  Login',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 decoration: TextDecoration.underline),
                           ),
-                          onPressed: navigateToSignUpPage,
                         ),
                       )
                     ],
@@ -150,22 +150,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+  void signUp()async{}
 
-  Future<void> logIn() async {
-    final formState = _formKey.currentState;
-    if (formState.validate()) {
-      formState.save();
-      try {
-        await widget.auth.signInWithEmailAndPassword(_email, _password);
-//        widget.onSignedIn();
-      } catch (e) {
-        _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text('${e.message}'),
-          duration: Duration(seconds: 5),
-        ));
-      }
-    }
-  }
-
-  void navigateToSignUpPage() {}
+  void navigateToLogInPage(){}
 }
+
